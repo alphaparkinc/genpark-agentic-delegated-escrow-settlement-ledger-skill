@@ -1,0 +1,65 @@
+{
+  "name": "genpark-agentic-delegated-escrow-settlement-ledger-skill",
+  "version": "1.0.0",
+  "description": "Cryptographic Delegated Agentic Commerce Escrow & Settlement Ledger (inspired by Mastercard Agent Connect & Stripe Split-Settlements). Provides multi-party conditional escrow locking, autonomous proof-of-delivery release triggers, referral fee splits, and dispute freeze protection.",
+  "tools": [
+    {
+      "name": "manage_agentic_escrow_ledger",
+      "description": "Agentic escrow and multi-party settlement: lock funds conditionally, release upon delivery proof, execute fee splits, and freeze contested transactions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "create_conditional_escrow",
+              "release_escrow_settlement",
+              "freeze_disputed_escrow",
+              "get_ledger_audit_trail"
+            ],
+            "description": "Ledger operation."
+          },
+          "escrow_id": {
+            "type": "string",
+            "description": "Unique escrow transaction identifier."
+          },
+          "payer_id": {
+            "type": "string",
+            "description": "Customer or delegating consumer ID."
+          },
+          "merchant_id": {
+            "type": "string",
+            "description": "Fulfilling seller ID."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Delegated autonomous agent ID."
+          },
+          "gross_amount_usd": {
+            "type": "number",
+            "description": "Total payment amount locked in escrow."
+          },
+          "agent_referral_basis_points": {
+            "type": "integer",
+            "description": "Agent referral share in bps (e.g. 300 = 3.0%)."
+          },
+          "release_conditions": {
+            "type": "object",
+            "description": "Conditional release criteria (e.g. tracking carrier delivery)."
+          },
+          "proof_of_delivery_token": {
+            "type": "string",
+            "description": "Cryptographic confirmation or carrier tracking event."
+          },
+          "dispute_reason": {
+            "type": "string",
+            "description": "Reason for freezing escrow."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  ]
+}
